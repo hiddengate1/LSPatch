@@ -2,6 +2,7 @@ project(lspatch)
 cmake_minimum_required(VERSION 3.4.1)
 
 add_subdirectory(${CORE_ROOT} core)
+add_subdirectory(bytehook)
 
 aux_source_directory(src SRC_LIST)
 aux_source_directory(src/jni SRC_LIST)
@@ -12,7 +13,7 @@ add_library(${PROJECT_NAME} SHARED ${SRC_LIST})
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 target_include_directories(${PROJECT_NAME} PRIVATE src)
 
-target_link_libraries(${PROJECT_NAME} core log)
+target_link_libraries(${PROJECT_NAME} core log bytehook)
 
 if (DEFINED DEBUG_SYMBOLS_PATH)
     set(DEBUG_SYMBOLS_PATH ${DEBUG_SYMBOLS_PATH}/${API})
